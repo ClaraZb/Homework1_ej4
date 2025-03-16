@@ -22,7 +22,7 @@ bool comparar(const char* palabra1, const char* palabra2){
     return comparar(palabra1+1, palabra2+1);
 }
 
-//Mismo codigo que la funcion anterior pero se ejecuta en tiempo de compilaicon
+//Mismo codigo que la funcion anterior pero se ejecuta en tiempo de compilacion
 constexpr bool comparar2(const char* palabra1, const char* palabra2){ 
     if (palabra1 != palabra2){ 
         return false;
@@ -33,21 +33,26 @@ constexpr bool comparar2(const char* palabra1, const char* palabra2){
     return comparar2(palabra1+1, palabra2+1);
 }
 
+
 int main(){
     const char *palabra1 = "El señor y la señora Dursley, que vivían en el número 4 de Privet Drive, estaban orgullosos.";
     const char *palabra2 = "El señor y la señora Dursley, que vivían en el número 5 de Privet Drive, estaban orgullosos.";
     
     auto startTime = chrono::high_resolution_clock::now();
-    comparar(palabra1, palabra2);
+    bool res = comparar(palabra1, palabra2);
     auto endTime = chrono::high_resolution_clock::now();
     auto elapsedTime = chrono::duration_cast<chrono::nanoseconds>(endTime-startTime);
+    
+    if (res == true) cout << "Los textos son iguales," << endl;
+    else cout << "Los textos son diferentes" << endl;
+   
     cout << "A comparar le tomo: " <<elapsedTime.count() << " nanosegundos" << endl;
 
     auto startTime2 = chrono::high_resolution_clock::now();
     comparar2(palabra1, palabra2);
     auto endTime2 = chrono::high_resolution_clock::now();
     auto elapsedTime2 = chrono::duration_cast<chrono::nanoseconds>(endTime2-startTime2);
-    cout << "A comparar le tomo: " <<elapsedTime2.count() << " nanosegundos" << endl;
+    cout << "A comparar2 le tomo: " <<elapsedTime2.count() << " nanosegundos" << endl;
 
     return 0;
 }
